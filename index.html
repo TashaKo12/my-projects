@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Мои проекты</title>
+  <style>
+:root {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: radial-gradient(circle at 20% 0%, #eef2ff 0%, #f8fafc 45%, #ffffff 100%);
+  color: #1e293b;
+}
+
+.page {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 64px 24px 80px;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.hero-kicker {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 999px;
+  background: #e0e7ff;
+  color: #4338ca;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.hero h1 {
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 800;
+  margin: 0 0 12px;
+  background: linear-gradient(90deg, #4338ca, #0ea5e9);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-subtitle {
+  font-size: 17px;
+  color: #475569;
+  margin: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 28px;
+  border-radius: 24px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card--ready {
+  cursor: pointer;
+}
+
+.card--ready:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(67, 56, 202, 0.18);
+  border-color: #c7d2fe;
+}
+
+.card--soon {
+  opacity: 0.75;
+  background: #f8fafc;
+}
+
+.card-emoji {
+  font-size: 40px;
+  margin-bottom: 14px;
+}
+
+.card-status {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  letter-spacing: 0.02em;
+}
+
+.card-status--ready {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.card-status--soon {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.card h2 {
+  font-size: 20px;
+  font-weight: 800;
+  margin: 0 0 10px;
+}
+
+.card p {
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.5;
+  margin: 0 0 20px;
+  flex: 1;
+}
+
+.card-cta {
+  font-weight: 700;
+  font-size: 14px;
+  color: #4338ca;
+}
+
+.card-cta--soon {
+  color: #b45309;
+}
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <p class="hero-kicker">Моя учебная студия</p>
+      <h1>Мои проекты</h1>
+      <p class="hero-subtitle">Здесь собраны тренажёры, которые я делаю. Выбирай и учись!</p>
+    </header>
+
+    <section class="grid">
+      <a class="card card--ready" href="https://tashako12.github.io/web-dev-trainer/" target="_blank" rel="noopener">
+        <span class="card-emoji">🌐</span>
+        <span class="card-status card-status--ready">Готово</span>
+        <h2>Тренажёр по веб-разработке</h2>
+        <p>HTML, CSS и JavaScript — 34 интерактивных тренажёра с живыми практиками.</p>
+        <span class="card-cta">Открыть тренажёр →</span>
+      </a>
+
+      <div class="card card--soon" aria-disabled="true">
+        <span class="card-emoji">🐍</span>
+        <span class="card-status card-status--soon">В разработке</span>
+        <h2>Тренажёр по Python</h2>
+        <p>Скоро здесь появятся интерактивные практики по Python. Загляни позже!</p>
+        <span class="card-cta card-cta--soon">Пока недоступно</span>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
