@@ -540,6 +540,56 @@ dialog[open] { animation: pop 0.25s ease; }
   color: var(--accent-text);
 }
 
+/* ── consent banner ── */
+.consent {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 40;
+  padding: 16px;
+  animation: rise 0.4s ease both;
+}
+.consent[hidden] { display: none; }
+.consent-card {
+  max-width: 780px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  border-radius: 24px;
+  background: var(--panel-solid);
+  border: 1px solid var(--border);
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.35);
+}
+.consent-icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: var(--chip);
+  color: var(--accent-text);
+}
+.consent-icon svg { width: 20px; height: 20px; }
+.consent-text { flex: 1 1 320px; display: flex; gap: 12px; }
+.consent-text b { display: block; font-size: 16px; font-weight: 900; margin-bottom: 4px; }
+.consent-text p { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.5; }
+.consent-actions { display: flex; gap: 8px; margin-left: auto; }
+.card .lock {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+}
+.card .lock svg { width: 14px; height: 14px; }
+body.guest .card .lock { display: inline-flex; }
+.note { margin: 0 0 14px; font-size: 13px; color: var(--muted); }
+
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 @media (max-width: 720px) {
@@ -604,6 +654,7 @@ dialog[open] { animation: pop 0.25s ease; }
           <span class="card-cta">Открыть курс
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </span>
+          <span class="lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Откроется после входа в аккаунт</span>
         </a>
 
         <a class="card" href="https://tashako12.github.io/web-dev-trainer/#/python" style="--card-grad: linear-gradient(135deg, #10b981, #0ea5e9); --card-glow: #34d399">
@@ -617,6 +668,7 @@ dialog[open] { animation: pop 0.25s ease; }
           <span class="card-cta">Открыть курс
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </span>
+          <span class="lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Откроется после входа в аккаунт</span>
         </a>
       </div>
     </section>
@@ -728,6 +780,24 @@ dialog[open] { animation: pop 0.25s ease; }
 
   <footer class="footer">Сделано для тех, кто делает первые шаги в программировании</footer>
 
+  <div class="consent" id="consent" role="dialog" aria-labelledby="consent-title" hidden>
+    <div class="consent-card">
+      <div class="consent-text">
+        <span class="consent-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        </span>
+        <div>
+          <b id="consent-title">Сохранять твой прогресс в этом браузере?</b>
+          <p>Запомним пройденные уровни, очки и выбранную тему. В браузере данные хранятся только на этом устройстве. Когда ты войдёшь в аккаунт, прогресс будет сохраняться и на сервере — по твоему коду его можно открыть на любом компьютере.</p>
+        </div>
+      </div>
+      <div class="consent-actions">
+        <button class="btn btn-ghost" id="consent-no" type="button">Нет</button>
+        <button class="btn btn-main" id="consent-yes" type="button">Да, сохранять</button>
+      </div>
+    </div>
+  </div>
+
   <dialog id="auth" aria-labelledby="auth-title">
     <div class="dlg">
       <div class="dlg-head">
@@ -742,6 +812,7 @@ dialog[open] { animation: pop 0.25s ease; }
       </div>
 
       <div id="student-view">
+        <p class="note">Вход включает сохранение прогресса в этом браузере и на сервере под твоим кодом.</p>
         <div class="dlg-cols">
           <form class="sub" id="login-form" novalidate>
             <h3>
@@ -945,6 +1016,8 @@ dialog[open] { animation: pop 0.25s ease; }
 
   function renderAccount() {
     const acc = account();
+    document.body.classList.toggle("guest", !acc);
+    if (acc) $("consent").hidden = true;
     const top = $("top-account");
     const panel = $("account-panel");
     top.innerHTML = "";
@@ -1195,8 +1268,34 @@ dialog[open] { animation: pop 0.25s ease; }
     }
   }
 
+  /* ── consent (same choice as in the trainers) ── */
+  const consentBox = $("consent");
+  function showConsent() {
+    consentBox.hidden = !(ls.get(CONSENT_KEY) === null && !account());
+  }
+  $("consent-yes").addEventListener("click", () => {
+    ls.set(CONSENT_KEY, "granted");
+    if (!root.classList.contains("dark")) ls.set("theme", "light");
+    consentBox.hidden = true;
+  });
+  $("consent-no").addEventListener("click", () => {
+    ls.set(CONSENT_KEY, "denied");
+    consentBox.hidden = true;
+  });
+
+  /* ── courses open only after sign-in ── */
+  document.querySelectorAll("#courses .card").forEach((card) =>
+    card.addEventListener("click", (e) => {
+      if (account()) return;
+      e.preventDefault();
+      openAuth("student");
+      Pixel.say("Сначала войди в аккаунт — так я сохраню твой прогресс.", "thinking", 2500);
+    }),
+  );
+
   /* ── start ── */
   renderAccount();
+  showConsent();
   const hash = location.hash;
   if (hash === "#rating") selectTab("rating");
   if (hash === "#login") openAuth("student");
