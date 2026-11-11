@@ -1036,10 +1036,24 @@ body.guest .card .lock { display: inline-flex; }
       if (acc.owner) { hello.append(el("b", null, acc.owner.name)); hello.append("! "); }
       hello.append("Твой код участника ");
       hello.append(el("span", "code", fmt(acc.code)));
-      const out = el("button", "btn btn-ghost btn-small", "Выйти");
-      out.type = "button";
-      out.addEventListener("click", signOut);
-      panel.append(hello, out);
+      panel.append(hello);
+      return;
+    }
+
+    const adminName = ls.get("admin-code") ? ls.get("admin-name") || "Педагог" : null;
+    if (adminName) {
+      const CROWN = '<svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Админ"><path d="m2 7 5 5 5-8 5 8 5-5-2 12H4z"/></svg>';
+      const chip = el("a", "btn btn-small user-chip");
+      chip.href = TRAINER + "#/admin";
+      chip.innerHTML = CROWN;
+      chip.append(el("span", "label label-wide", adminName));
+      top.append(chip);
+      const hello = el("p", "hello");
+      hello.innerHTML = CROWN.replace("<svg ", '<svg style="width:16px;height:16px;vertical-align:-2px;margin-right:4px" ');
+      hello.append(el("b", null, adminName));
+      const cab = el("a", "btn btn-main btn-small", "Кабинет педагога");
+      cab.href = TRAINER + "#/admin";
+      panel.append(hello, cab);
       return;
     }
 
@@ -1205,8 +1219,9 @@ body.guest .card .lock { display: inline-flex; }
     btn.disabled = true;
     btn.textContent = "Проверяю…";
     try {
-      await rpc("admin_overview", { p_code: code });
-      try { sessionStorage.setItem("admin-code", code); } catch {}
+      const res = await rpc("admin_overview", { p_code: code });
+      ls.set("admin-code", code);
+      if (res && res.admin) ls.set("admin-name", res.admin);
       location.href = TRAINER + "#/admin";
     } catch {
       showMsg("teacher-msg", "Код не подошёл.");
@@ -1286,7 +1301,7 @@ body.guest .card .lock { display: inline-flex; }
   /* ── courses open only after sign-in ── */
   document.querySelectorAll("#courses .card").forEach((card) =>
     card.addEventListener("click", (e) => {
-      if (account()) return;
+      if (account() || ls.get("admin-code")) return;
       e.preventDefault();
       openAuth("student");
       Pixel.say("Сначала войди в аккаунт — так я сохраню твой прогресс.", "thinking", 2500);
