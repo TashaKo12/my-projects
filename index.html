@@ -1145,6 +1145,11 @@ body.guest .card .lock { display: inline-flex; }
   /* ── sign-in dialog ── */
   const dlg = $("auth");
   function openAuth(who) {
+    // already signed in as a student or the teacher: never show the sign-in window again
+    if (account() || ls.get("admin-code")) {
+      history.replaceState(null, "", location.pathname);
+      return;
+    }
     showView(who === "teacher" ? "teacher" : "student");
     if (!dlg.open) dlg.showModal();
     setTimeout(() => (who === "teacher" ? $("teacher-code") : $("login-code")).focus(), 50);
