@@ -1221,6 +1221,7 @@ body.guest .card .lock { display: inline-flex; }
     try {
       const res = await rpc("admin_overview", { p_code: code });
       ls.set("admin-code", code);
+      ls.set(CONSENT_KEY, "granted");
       if (res && res.admin) ls.set("admin-name", res.admin);
       location.href = TRAINER + "#/admin";
     } catch {
@@ -1286,7 +1287,8 @@ body.guest .card .lock { display: inline-flex; }
   /* ── consent (same choice as in the trainers) ── */
   const consentBox = $("consent");
   function showConsent() {
-    consentBox.hidden = !(ls.get(CONSENT_KEY) === null && !account());
+    // asked once: any answer, a student sign-in or a teacher sign-in settles it for good
+    consentBox.hidden = !(ls.get(CONSENT_KEY) === null && !account() && !ls.get("admin-code"));
   }
   $("consent-yes").addEventListener("click", () => {
     ls.set(CONSENT_KEY, "granted");
