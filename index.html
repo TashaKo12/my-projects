@@ -780,6 +780,20 @@ html.dark .tags span { color: #c4b5fd; }
   .hero h1 { font-size: 21px; overflow-wrap: anywhere; }
   .hero-subtitle { font-size: 14px; }
 }
+
+/* the title block: just the text on the page (no background, no logo) */
+.banner { background: none; box-shadow: none; padding: 0; min-height: 0; border-radius: 0; overflow: visible; }
+.banner .kicker { color: var(--accent-text); }
+.hero h1, .hero h1 .grad { color: var(--text); }
+.hero-subtitle { color: var(--muted); }
+.hero-subtitle b { color: var(--text); }
+@media (max-width: 640px) { .banner { padding: 0; } }
+
+/* course pictures instead of the coloured header with an icon */
+.card-pic { display: block; width: 100%; height: auto; aspect-ratio: 810 / 490; object-fit: cover; margin: 0 0 16px; background: #8ea7ef; }
+/* on a picture card the label goes under the picture, so it never covers the title drawn in it */
+.card:has(.card-pic) .card-pic { order: -1; }
+.card:has(.card-pic) .status { position: static; order: 0; width: fit-content; margin: 0 20px 8px; background: var(--chip) !important; }
   </style>
 </head>
 <body>
@@ -814,20 +828,6 @@ html.dark .tags span { color: #c4b5fd; }
   <main class="page">
     <section class="hero">
       <div class="banner">
-        <svg class="banner-sky" aria-hidden="true" viewBox="0 0 1120 216" preserveAspectRatio="xMidYMid slice">
-          <path d="M125 0 C 95 45 85 90 85 118" fill="none" stroke="#fff" stroke-opacity="0.55" stroke-width="1.6"/>
-          <path d="M1055 30 C 1065 140 980 206 825 206" fill="none" stroke="#fff" stroke-opacity="0.55" stroke-width="1.6"/>
-          <g fill="#fff" fill-opacity="0.55"><circle cx="205" cy="4" r="4"/><circle cx="300" cy="20" r="4"/><circle cx="460" cy="95" r="4"/><circle cx="565" cy="113" r="4"/><circle cx="625" cy="90" r="4"/><circle cx="805" cy="62" r="5"/><circle cx="940" cy="135" r="5"/><circle cx="540" cy="188" r="4"/><circle cx="728" cy="188" r="4"/><circle cx="36" cy="190" r="7"/></g>
-          <g fill="#fff" fill-opacity="0.7">
-            <path d="M50 36 C51 42 51 42 57 43 C51 44 51 44 50 50 C49 44 49 44 43 43 C49 42 49 42 50 36Z"/>
-            <path d="M365 72 C366 78 366 78 372 79 C366 80 366 80 365 86 C364 80 364 80 358 79 C364 78 364 78 365 72Z"/>
-            <path d="M660 121 C661 127 661 127 667 128 C661 129 661 129 660 135 C659 129 659 129 653 128 C659 127 659 127 660 121Z"/>
-            <path d="M1090 87 C1091 93 1091 93 1097 94 C1091 95 1091 95 1090 101 C1089 95 1089 95 1083 94 C1089 93 1089 93 1090 87Z"/>
-            <path d="M1055 4 C1058 19 1058 19 1073 22 C1058 25 1058 25 1055 40 C1052 25 1052 25 1037 22 C1052 19 1052 19 1055 4Z"/>
-            <path d="M85 101 C88 114 88 114 101 117 C88 120 88 120 85 133 C82 120 82 120 69 117 C82 114 82 114 85 101Z"/>
-          </g>
-        </svg>
-        <span class="banner-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><path d="M17 13v8M13 17h8"/></svg></span>
         <div class="banner-text">
           <p class="kicker">Онлайн-обучение</p>
           <h1>Курсы по <span class="grad">изучению программирования</span></h1>
@@ -849,9 +849,7 @@ html.dark .tags span { color: #c4b5fd; }
         <div class="grid">
         <a class="card" href="https://tashako12.github.io/web-dev-trainer/#/quest" style="--card-grad: linear-gradient(135deg, #7c3aed, #db2777); --card-glow: #e879f9">
           <span class="status status-soon">Новое · для 7–9 лет</span>
-          <span class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="8" width="14" height="11" rx="3"/><path d="M12 8V5M12 4h.01M9 13h.01M15 13h.01M9.5 16h5M3 12v3M21 12v3"/></svg>
-          </span>
+          <img class="card-pic" src="images/courses/quest.png" alt="Тайна станции" width="810" height="490" loading="lazy" />
           <h2>Тайна станции</h2>
           <p>Игра-приключение: собирай программу из блоков, веди робота Пикселя по станции и разгадай, куда пропала Создательница.</p>
           <span class="card-cta">Начать игру
@@ -861,9 +859,7 @@ html.dark .tags span { color: #c4b5fd; }
 
         <a class="card" href="https://tashako12.github.io/web-dev-trainer/#/logic" style="--card-grad: linear-gradient(135deg, #0ea5e9, #22c55e); --card-glow: #4ade80">
           <span class="status status-soon">Новое · для 7–9 лет</span>
-          <span class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2V17h6v-.3c0-.8.4-1.5 1-2A7 7 0 0 0 12 2z"/></svg>
-          </span>
+          <img class="card-pic" src="images/courses/logic.png" alt="Остров загадок" width="810" height="490" loading="lazy" />
           <h2>Остров загадок</h2>
           <p>Игра на логику: продолжи узор, найди лишнее, разберись с весами и выясни, кто где живёт. В конце — карта сокровищ.</p>
           <span class="card-cta">Начать игру
@@ -873,9 +869,7 @@ html.dark .tags span { color: #c4b5fd; }
 
         <a class="card" href="https://tashako12.github.io/web-dev-trainer/#/keys" style="--card-grad: linear-gradient(135deg, #f59e0b, #ef4444); --card-glow: #fb923c">
           <span class="status status-soon">Новое · для 7–9 лет</span>
-          <span class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></svg>
-          </span>
+          <img class="card-pic" src="images/courses/keys.png" alt="Клавиатура Пикселя" width="810" height="490" loading="lazy" />
           <h2>Клавиатура Пикселя</h2>
           <p>Находи клавиши на настоящей клавиатуре и узнавай, что они делают: буквы, Enter, Backspace, Shift и полезные сочетания.</p>
           <span class="card-cta">Начать игру
