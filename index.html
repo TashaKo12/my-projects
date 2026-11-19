@@ -7,7 +7,7 @@
   <meta name="description" content="Курсы по изучению программирования для детей: игры для младших (алгоритмы, логика, клавиатура) и тренажёры по веб-разработке и Python." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@500&family=Montserrat:wght@400;500;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@500&family=Manrope:wght@500;600;700;800&family=Nunito+Sans:wght@400;500;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
 :root {
   --bg: linear-gradient(180deg, #f5f7ff 0%, #eef1ff 45%, #f8fafc 100%);
@@ -667,10 +667,10 @@ body.guest .card .lock { display: inline-flex; }
   --panel-solid: #ffffff;
   --border: #e6e7ee;
   --chip: #f1f2f6;
-  --chip-text: #4f1fd1;
-  --accent: #4f1fd1;
-  --accent-2: #4f1fd1;
-  --accent-text: #4f1fd1;
+  --chip-text: #4d16c9;
+  --accent: #4d16c9;
+  --accent-2: #4d16c9;
+  --accent-text: #4d16c9;
   --shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
   --line: #c4b5fd;
 }
@@ -687,7 +687,8 @@ html.dark {
   --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   --line: #6d4aff;
 }
-body { font-family: "Montserrat", "Nunito", system-ui, sans-serif; }
+body { font-family: "Nunito Sans", "Nunito", system-ui, sans-serif; }
+h1, h2, h3, .brand-name, .stage-title, .tab { font-family: "Manrope", "Nunito Sans", system-ui, sans-serif; }
 html:not(.dark) .glow { display: none; }
 
 .topbar { background: var(--panel-solid); backdrop-filter: none; }
@@ -697,7 +698,7 @@ html:not(.dark) .glow { display: none; }
   border: 2px solid #5b2ee0; color: #5b2ee0;
 }
 .brand-mark svg { width: 20px; height: 20px; color: inherit; }
-.brand-name { display: block; font-size: 17px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.03em; color: #4f1fd1; line-height: 1; }
+.brand-name { display: block; font-size: 17px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.03em; color: #4d16c9; line-height: 1; }
 .brand-sub { display: block; font-size: 10px; font-weight: 600; color: #7c5cf0; margin-top: 3px; }
 html.dark .brand-mark { border-color: #a78bfa; color: #c4b5fd; }
 html.dark .brand-name { color: #c4b5fd; }
@@ -705,12 +706,12 @@ html.dark .brand-sub { color: #a78bfa; }
 
 .tabs { border-radius: 10px; background: var(--chip); }
 .tab { border-radius: 8px; font-weight: 600; }
-.tab[aria-selected="true"] { background: #4f1fd1; box-shadow: 0 1px 3px rgba(79, 31, 209, 0.3); }
+.tab[aria-selected="true"] { background: #4d16c9; box-shadow: 0 1px 3px rgba(79, 31, 209, 0.3); }
 html.dark .tab[aria-selected="true"] { background: #6d4aff; }
 
 .btn { border-radius: 8px; font-weight: 600; }
-.btn-main { background: #4f1fd1; box-shadow: 0 1px 3px rgba(79, 31, 209, 0.3); }
-.btn-main:hover:not(:disabled) { opacity: 1; background: #4318b8; }
+.btn-main { background: #4d16c9; box-shadow: 0 1px 3px rgba(79, 31, 209, 0.3); }
+.btn-main:hover:not(:disabled) { opacity: 1; background: #4514b5; }
 .icon-btn { border-radius: 50%; }
 
 .page { padding-top: 28px; }
@@ -766,7 +767,7 @@ html.dark .tab[aria-selected="true"] { background: #6d4aff; }
 html.dark .status { background: rgba(15, 16, 34, 0.85) !important; }
 html.dark .status-ready { color: #34d399 !important; }
 html.dark .status-soon { color: #fbbf24 !important; }
-.tags span { font-family: "Montserrat", sans-serif; font-size: 11px; font-weight: 600; border-radius: 6px; background: var(--chip); color: #64748b; }
+.tags span { font-family: "Nunito Sans", sans-serif; font-size: 11px; font-weight: 600; border-radius: 6px; background: var(--chip); color: #64748b; }
 html.dark .tags span { color: #c4b5fd; }
 .card-cta { font-size: 14px; font-weight: 700; }
 
