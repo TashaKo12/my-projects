@@ -794,6 +794,14 @@ html.dark .tags span { color: #c4b5fd; }
 /* on a picture card the label goes under the picture, so it never covers the title drawn in it */
 .card:has(.card-pic) .card-pic { order: -1; }
 .card:has(.card-pic) .status { position: static; order: 0; width: fit-content; margin: 0 20px 8px; background: var(--chip) !important; }
+/* ── big screens: everything grows like a browser zoom (up to ~150%), the page keeps fitting the window ── */
+:root { --z: 1; }
+@media (min-width: 1600px) and (min-height: 860px) { :root { --z: 1.15; } }
+@media (min-width: 1800px) and (min-height: 960px) { :root { --z: 1.3; } }
+@media (min-width: 2000px) and (min-height: 1060px) { :root { --z: 1.45; } }
+html { zoom: var(--z); }
+body { min-height: calc(100vh / var(--z)); }
+dialog { max-height: calc((100vh - 32px) / var(--z)); }
   </style>
 </head>
 <body>
