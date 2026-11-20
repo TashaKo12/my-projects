@@ -793,6 +793,9 @@ html.dark .tags span { color: #c4b5fd; }
 .card-pic { display: block; width: 100%; height: auto; aspect-ratio: 810 / 490; object-fit: cover; margin: 0 0 16px; background: #8ea7ef; }
 /* on a picture card the label goes under the picture, so it never covers the title drawn in it */
 .card:has(.card-pic) .card-pic { order: -1; }
+/* a course without its picture yet: a coloured cover with a line of code */
+.card-pic-plain { display: flex; align-items: center; justify-content: center; gap: 12px; background: var(--card-grad); color: #fff; font: 800 clamp(20px, 2.4vw, 30px) "Manrope", sans-serif; letter-spacing: 0.02em; }
+.card-pic-plain small { display: block; font-size: 0.5em; font-weight: 700; opacity: 0.85; }
 .card:has(.card-pic) .status { position: static; order: 0; width: fit-content; margin: 0 20px 8px; background: var(--chip) !important; }
 /* ── big screens: everything grows like a browser zoom (up to ~150%), the page keeps fitting the window ── */
 :root { --z: 1; }
@@ -926,6 +929,26 @@ dialog { max-height: calc((100vh - 32px) / var(--z)); }
           </span>
         </a>
 
+        </div>
+      </div>
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-num">3</span>
+          <div>
+            <h2 class="stage-title">Программирование (3 ступень)</h2>
+            <p class="stage-note">Для 8–11 классов и студентов СПО: базы данных и язык SQL.</p>
+          </div>
+        </div>
+        <div class="grid">
+        <a class="card" href="https://tashako12.github.io/web-dev-trainer/#/sql" style="--card-grad: linear-gradient(135deg, #0ea5e9, #4f46e5); --card-glow: #60a5fa">
+          <span class="status status-soon">Новое · модуль 1</span>
+          <div class="card-pic card-pic-plain" aria-hidden="true"><span>SELECT * <small>FROM знания;</small></span></div>
+          <h2>Программирование на SQL</h2>
+          <p>Базы данных как у настоящих разработчиков: проектирование, типы данных, таблицы и CRUD. Все запросы выполняются по-настоящему прямо в браузере.</p>
+          <span class="card-cta">Открыть курс
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </a>
         </div>
       </div>
     </section>
